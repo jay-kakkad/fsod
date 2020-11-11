@@ -45,7 +45,7 @@ def filter_coco(coco, split):
                 else:
                     all_cls_dict[ann['category_id']] = 1
         
-    print(new_anns)
+    # print(new_anns)
     print(sorted(all_cls_dict.items(), key = lambda kv:(kv[1], kv[0])))
     return new_anns
  
