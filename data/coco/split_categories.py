@@ -32,6 +32,8 @@ support_dict = {
     "file_path": []
 }
 
+voc_idxs = {0, 1, 2, 3, 4, 5, 6, 8, 14, 15, 16, 17, 18, 19, 39, 56, 57, 58, 60, 62}
+
 FILES = ['instances_train2017.json']
 
 for annotation_file in FILES:
@@ -45,9 +47,24 @@ for annotation_file in FILES:
         logging.error("Dataset cannot be none")
         sys.exit()
     
-    print("\n CATEGORIES")
-    for category in dataset['categories']:
-        print(category)
+    # print("\n CATEGORIES")
+    # for category in dataset['categories']:
+    #     print(category)
+
+    idxs_split2 = [i for i in range(len(dataset['categories'])) if i not in voc_idxs]
+    category_split_1 = [dataset['categories'][i] for i in voc_idxs]
+    category_split_2 = [dataset['categories'][i] for i in idxs_split2]
+
+    cids_split1 = [c['id'] for c in categories_split1]
+    cids_split2 = [c['id'] for c in categories_split2]
+    print('Split 1: {} classes'.format(len(categories_split1)))
+    for c in categories_split1:
+        print('\t', c['name'])
+    print('Split 2: {} classes'.format(len(categories_split2)))
+    for c in categories_split2:
+        print('\t', c['name'])
+
+
     
         
 
