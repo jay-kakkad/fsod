@@ -56,6 +56,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s :: %(message)s', datefmt
 
 # For accepting Sys ARG for directory use below line
 # DATA_DIR = sys.argv[1]
+ROOT_PATH = "/data/jkakkad/fsod-data/coco"
 DATA_DIR = "/data/jkakkad/fsod-data/coco/annotations"
 logging.info(DATA_DIR + "\n")
 
@@ -110,6 +111,29 @@ for annotation_file in FILES:
 
     # for non-voc, there can be non-voc images
     annotations_non_voc = filter_coco(coco, cids_non_voc)
+
+    dataset_voc = {
+        'info': dataset['info'],
+        'licenses': dataset['licenses'],
+        'images': dataset['images'],
+        'annotations': annotations_voc,
+        'categories': category_voc
+    }
+    dataset_non_voc = {
+        'info': dataset['info'],
+        'licenses': dataset['licenses'],
+        'images': dataset['images'],
+        'annotations': annotations_non_voc,
+        'categories': category_non_voc
+    }
+    new_annotations_path = os.path.join(ROOT_PATH, "new_annotations")
+    if not os.path.exists(new_annotations_path):
+        os.mkdir(new_annotations_path)
+    non_voc_file = os.path.join(new_annotations_path, 'final_split_non_voc_instances_train2017.json')
+
+    with open(non_voc_file, 'w') as f:
+        json.dump(dataset_non_voc, f)
+
 
 
 
