@@ -19,6 +19,7 @@ def filter_coco(coco, split):
     new_anns = []
     all_cls_dict = {}
     for img_id, id in enumerate(coco.imgs):
+        print("Image_ID: " + img_id + "\t ID:" + id)
         img = coco.loadImgs(id)[0]
         anns = coco.loadAnns(coco.getAnnIds(imgIds=id, iscrowd = None))
         SKIP_FLAG = False
