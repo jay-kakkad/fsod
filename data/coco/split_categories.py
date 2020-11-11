@@ -19,7 +19,6 @@ def filter_coco(coco, split):
     new_anns = []
     all_cls_dict = {}
     for img_id, id in enumerate(coco.imgs):
-        print("Image_ID: " + str(img_id) + "\t ID:" + str(id))
         img = coco.loadImgs(id)[0]
         anns = coco.loadAnns(coco.getAnnIds(imgIds=id, iscrowd = None))
         SKIP_FLAG = False
@@ -32,6 +31,7 @@ def filter_coco(coco, split):
             if ann['category_id'] in split:
                 if (bbox[2] * bbox[3]) < (32*32):
                     SKIP_FLAG = True
+                    break
         
         if SKIP_FLAG:
             continue
