@@ -30,7 +30,7 @@ def filter_coco(coco, split):
         for ann in anns:
             bbox = ann['bbox']
             if ann['category_id'] in split:
-                if (bbox[2] * bbox['bbox'][3]) < (32*32):
+                if (bbox[2] * bbox[3]) < (32*32):
                     SKIP_FLAG = True
         
         if SKIP_FLAG:
