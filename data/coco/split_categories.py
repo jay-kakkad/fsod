@@ -15,6 +15,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s :: %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
 # Initializing INPUT
 
 # For accepting Sys ARG for directory use below line
@@ -40,7 +42,7 @@ for annotation_file in FILES:
         print(dataset.keys())
 
     if dataset is None:
-        print("ERROR: Dataset cannot be none")
+        logging.error("Dataset cannot be none")
         sys.exit()
     
     print("\n CATEGORIES")
