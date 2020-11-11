@@ -19,8 +19,8 @@ import pandas as pd
 
 # For accepting Sys ARG for directory use below line
 # DATA_DIR = sys.argv[1]
-DATA_DIR = "/data/jkakkad/fsod-data/annotations"
-logging.info(root_dir + "\n")
+DATA_DIR = "/data/jkakkad/fsod-data/coco/annotations"
+logging.info(DATA_DIR + "\n")
 
 support_dict = {
     "support_box": [],
@@ -37,12 +37,13 @@ for annotation_file in FILES:
     dataset = None
     with open(annFile, 'r') as file:
         dataset = json.load(file)
-        logging.info(dataset.keys() + "\n")
+        print(dataset.keys())
 
     if dataset is None:
-        logging.critical("Dataset cannot be none")
+        print("ERROR: Dataset cannot be none")
         sys.exit()
     
+    print("\n CATEGORIES")
     for category in dataset['categories']:
         print(category)
     
