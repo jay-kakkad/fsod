@@ -105,7 +105,7 @@ for annotation_file in FILES:
         if ann['category_id'] in cids_voc:
             annotations_voc.append(ann)
     
-    print(annotations_voc)
+    # print(annotations_voc)
 
     # for non-voc, there can be non-voc images
     annotations_non_voc = filter_coco(coco, cids_non_voc)
