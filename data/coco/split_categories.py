@@ -55,13 +55,13 @@ for annotation_file in FILES:
     category_split_1 = [dataset['categories'][i] for i in voc_idxs]
     category_split_2 = [dataset['categories'][i] for i in idxs_split2]
 
-    cids_split1 = [c['id'] for c in categories_split1]
-    cids_split2 = [c['id'] for c in categories_split2]
-    print('Split 1: {} classes'.format(len(categories_split1)))
-    for c in categories_split1:
+    cids_split1 = [c['id'] for c in category_split_1]
+    cids_split2 = [c['id'] for c in category_split_2]
+    print('Split 1: {} classes'.format(len(category_split_1)))
+    for c in category_split_1:
         print('\t', c['name'])
-    print('Split 2: {} classes'.format(len(categories_split2)))
-    for c in categories_split2:
+    print('Split 2: {} classes'.format(len(category_split_2)))
+    for c in category_split_2:
         print('\t', c['name'])
 
 
