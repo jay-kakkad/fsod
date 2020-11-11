@@ -39,10 +39,10 @@ def filter_coco(coco, split):
             if ann['category_id'] in split:
                 new_anns.append(ann)
                 
-                if category_id in all_cls_dict.keys():
-                        all_cls_dict[category_id] += 1
+                if ann['category_id'] in all_cls_dict.keys():
+                        all_cls_dict[ann['category_id']] += 1
                 else:
-                    all_cls_dict[category_id] = 1
+                    all_cls_dict[ann['category_id']] = 1
         
         print(new_anns)
         print(sorted(all_cls_dict.items(), key = lambda kv:(kv[1], kv[0])))
