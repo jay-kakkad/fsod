@@ -55,6 +55,8 @@ for annotation_file in FILES:
     category_split_1 = [dataset['categories'][i] for i in voc_idxs]
     category_split_2 = [dataset['categories'][i] for i in idxs_split2]
 
+    print(category_split_1.keys())
+    
     cids_split1 = [c['id'] for c in category_split_1]
     cids_split2 = [c['id'] for c in category_split_2]
     print('Split 1: {} classes'.format(len(category_split_1)))
