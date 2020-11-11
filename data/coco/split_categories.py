@@ -102,7 +102,7 @@ for annotation_file in FILES:
     annotations_voc = []
 
     for ann in dataset['annotations']:
-        if ann['category'] in cids_voc:
+        if ann['category_id'] in cids_voc:
             annotations_voc.append(ann)
     
 
