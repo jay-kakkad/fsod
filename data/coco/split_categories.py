@@ -15,6 +15,40 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+def filter_coco(coco, split):
+    new_anns = []
+    all_cls_dict = {}
+    for img_id, id in enumerate(coco.imgs):
+        img = coco.loadImgs(id)[0]
+        anns = coco.loadAnns(coco.getAnnIds(imgIds=id, iscrowd = None))
+        SKIP_FLAG = False
+
+        if len(anns) == 0:
+            continue
+
+        for ann in anns:
+            if ann['category_id'] in split:
+                if ann['bbox'][2] * ann['bbox'][3] < 32*32:
+                    SKIP_FLAG = True
+                    break
+        
+        if SKIP_FLAG:
+            continue
+        
+        for ann in anns:
+            if ann['category_id'] in split:
+                new_anns.append(ann)
+                
+                if category_id in all_cls_dict.keys():
+                        all_cls_dict[category_id] += 1
+                else:
+                    all_cls_dict[category_id] = 1
+        
+        print(new_anns)
+        print(sorted(all_cls_dict.items(), key = lambda kv:(kv[1], kv[0])))
+        return new_anns
+ 
+
 logging.basicConfig(format='%(asctime)s - %(levelname)s :: %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 # Initializing INPUT
@@ -46,25 +80,36 @@ for annotation_file in FILES:
     if dataset is None:
         logging.error("Dataset cannot be none")
         sys.exit()
-    
-    # print("\n CATEGORIES")
-    # for category in dataset['categories']:
-    #     print(category)
 
-    idxs_split2 = [i for i in range(len(dataset['categories'])) if i not in voc_idxs]
-    category_split_1 = [dataset['categories'][i] for i in voc_idxs]
-    category_split_2 = [dataset['categories'][i] for i in idxs_split2]
+    non_voc_idxs = set([i for i in range(len(dataset['categories'])) if i not in voc_idxs])
 
-    print(category_split_1.keys())
+    category_voc = [dataset['categories'][i] for i in voc_idxs]
+    category_non_voc = [dataset['categories'][i] for i in non_voc_idxs]
+
+    cids_voc = [c['id'] for c in category_voc]
+    cids_non_voc = [c['id'] for c in category_non_voc]
+
+    print('VOC: {} classes'.format(len(category_voc)))
+    for c in category_voc:
+        print('\t', c['name'])
+    print('Non VOC: {} classes'.format(len(category_non_voc)))
+    for c in category_non_voc:
+        print('\t', c['name'])
+
+    coco = COCO(annFile)
+
+    # VOC based annotations
+    annotations_voc = []
+
+    for ann in dataset['annotations']:
+        if ann['category'] in cids_voc:
+            annotations_voc.append(ann)
     
-    cids_split1 = [c['id'] for c in category_split_1]
-    cids_split2 = [c['id'] for c in category_split_2]
-    print('Split 1: {} classes'.format(len(category_split_1)))
-    for c in category_split_1:
-        print('\t', c['name'])
-    print('Split 2: {} classes'.format(len(category_split_2)))
-    for c in category_split_2:
-        print('\t', c['name'])
+
+    # for non-voc, there can be non-voc images
+    annotations_non_voc = filter_coco(coco, cids_non_voc)
+
+
 
 
     
