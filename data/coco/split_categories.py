@@ -27,10 +27,10 @@ def filter_coco(coco, split):
             continue
 
         for ann in anns:
+            bbox = ann['bbox']
             if ann['category_id'] in split:
-                if ann['bbox'][2] * ann['bbox'][3] < 32*32:
+                if (bbox[2] * bbox['bbox'][3]) < (32*32):
                     SKIP_FLAG = True
-                    break
         
         if SKIP_FLAG:
             continue
@@ -105,6 +105,7 @@ for annotation_file in FILES:
         if ann['category_id'] in cids_voc:
             annotations_voc.append(ann)
     
+    print(annotations_voc)
 
     # for non-voc, there can be non-voc images
     annotations_non_voc = filter_coco(coco, cids_non_voc)
