@@ -205,7 +205,7 @@ def main():
             if img_id%100 == 0:
                 print('Image number:{}'.format(img_id))
             img = coco.loadImgs(id)[0]
-            anns = coco.loadAnns(coco.getAnnIds(imgsIds = img, iscrowd = None))
+            anns = coco.loadAnns(coco.getAnnIds(imgIds = img, iscrowd = None))
 
             if len(anns) == 0:
                 continue
