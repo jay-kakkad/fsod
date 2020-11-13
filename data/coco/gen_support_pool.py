@@ -175,8 +175,8 @@ def crop_support(img, bbox):
 
 
 def main():
-    DATA_DIR = '/data/jkakkad/fsod-data'
-    ROOT_PATH = '/data/jkakkad/fsod-data'
+    DATA_DIR = '/data/jkakkad/fsod-data/coco'
+    ROOT_PATH = '/data/jkakkad/fsod-data/coco'
 
     support_path = os.path.join(DATA_DIR, 'support')
     if not isdir(support_path):
