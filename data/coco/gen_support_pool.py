@@ -239,7 +239,7 @@ def main():
 if __name__ == "__main__":
     start_time = time.time()
     support_df = main()
-    support_df.toPickle("./train_support_df.pkl")
+    support_df.to_pickle("./train_support_df.pkl")
 
     time_elapsed = time.time() - start_time
     print('Total time : {:.0f}m {:.0f}s'.format(time_elapsed//60, time_elapsed%60))
