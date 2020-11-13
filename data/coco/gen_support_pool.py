@@ -232,6 +232,8 @@ def main():
                 support_dict['id'].append(ann['id'])
                 support_dict['file_path'].append(file_path)
 
+        support_df = pd.DataFrame.from_dict(support_dict)
+        return support_df
                 
 
 if __name__ == "__main__":
