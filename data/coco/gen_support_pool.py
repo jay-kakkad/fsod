@@ -210,6 +210,9 @@ def main():
             img = coco.loadImgs(id)[0]
             anns = coco.loadAnns(coco.getAnnIds(imgIds = img, iscrowd = None))
 
+            if img_id%100 == 0:
+                print('Image number:{} \t'.format(img))
+
             if len(anns) == 0:
                 continue
 
