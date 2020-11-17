@@ -196,7 +196,7 @@ def main():
             mkdir(set_crop_base_path)
         set_img_base_path = join(DATA_DIR, 'images/' + dataType)
 
-        print("Crop Path:" + isdir(set_crop_base_path))
+        print("Crop Path:" + str(isdir(set_crop_base_path)))
 
         annFile = join(DATA_DIR, 'new_annotations/final_split_non_voc_instances_train2017.json')
         with open(annFile, 'r') as file:
