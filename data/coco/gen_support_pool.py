@@ -208,18 +208,18 @@ def main():
         for img_id, id in enumerate(coco.imgs):
 
             img = coco.loadImgs(id)[0]
-            anns = coco.loadAnns(coco.getAnnIds(imgIds = img, iscrowd = None))
+            anns = coco.loadAnns(coco.getAnnIds(imgIds = img['id'], iscrowd = None))
 
             if img_id%100 == 0:
-                print('Image number:{} \t'.format(img))
+                print('Image number:{} \t'.format(img['id']))
 
             if len(anns) == 0:
                 continue
 
             frame_crop_base_path = join(set_crop_base_path, img['file_name'].split('/')[-1].split('.')[0])
             
-            if img_id%100 == 0:
-                print('Image number:{} \t Path: {}'.format(img_id, frame_crop_base_path))
+            # if img_id%100 == 0:
+            #     print('Image number:{} \t Path: {}'.format(img_id, frame_crop_base_path))
             
             if not isdir(frame_crop_base_path): makedirs(frame_crop_base_path)
 
