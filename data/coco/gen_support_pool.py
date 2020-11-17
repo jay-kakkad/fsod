@@ -206,8 +206,7 @@ def main():
         coco = COCO(annFile)
 
         for img_id, id in enumerate(coco.imgs):
-            if img_id%100 == 0:
-                print('Image number:{}'.format(img_id))
+
             img = coco.loadImgs(id)[0]
             anns = coco.loadAnns(coco.getAnnIds(imgIds = img, iscrowd = None))
 
@@ -215,6 +214,10 @@ def main():
                 continue
 
             frame_crop_base_path = join(set_crop_base_path, img['file_name'].split('/')[-1].split('.')[0])
+            
+            if img_id%100 == 0:
+                print('Image number:{} \t Path: {}'.format(img_id, frame_crop_base_path))
+            
             if not isdir(frame_crop_base_path): makedirs(frame_crop_base_path)
 
             im = cv2.imread('{}/{}'.format(set_img_base_path, img['file_name']))
