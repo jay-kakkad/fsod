@@ -192,7 +192,11 @@ def main():
 
     for dataType in ['train2017']:
         set_crop_base_path = join(support_path, dataType)
+        if not isdir(set_crop_base_path):
+            mkdir(set_crop_base_path)
         set_img_base_path = join(DATA_DIR, 'images/' + dataType)
+
+        print("Crop Path:" + isdir(set_crop_base_path))
 
         annFile = join(DATA_DIR, 'new_annotations/final_split_non_voc_instances_train2017.json')
         with open(annFile, 'r') as file:
@@ -223,6 +227,7 @@ def main():
                     continue
 
                 support_img, support_box = crop_support(im, bbox)
+
                 file_path = join(frame_crop_base_path, '{:04d}.jpg'.format(item_id))
                 cv2.imwrite(file_path, support_img)
 
